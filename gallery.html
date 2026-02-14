@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Professional laboratory testing and calibration services. Reliable and accurate results for industrial and research needs.">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans text-gray-700">
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+<main class="pt-24">
+    <!-- Page Header -->
+    <section class="bg-blue-700 text-white py-16 text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-bold" data-aos="fade-up">Gallery</h1>
+            <p class="mt-4 text-blue-100 text-lg" data-aos="fade-up" data-aos-delay="150">
+            Documentation of our laboratory facilities and operational activities
+            </p>
+        </div>
+    </section>
+    <section class="bg-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <p class="text-gray-600" data-aos="fade-up" data-aos-delay="300">
+            Below are some of our laboratory activities, equipment, and field operations
+            demonstrating our capability in providing professional services.
+            </p>
+        </div>
+    </section>
+
+
+
+  <!-- Gallery Grid -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-6" data-aos="fade-up">
+
+        <div id="gallery-container"
+            class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- CTA -->
+  <section class="py-16 bg-blue-700 text-white text-center" data-aos="zoom-in">
+    <h2 class="text-3xl font-bold mb-4">Interested in Our Facilities?</h2>
+    <a href="contact.html" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold mr-3">Contact Us</a>
+    <a href="https://wa.me/62XXXXXXXXXX" class="bg-green-500 px-6 py-3 rounded-lg font-semibold">WhatsApp Us</a>
+  </section>
+</main>
+  
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Floating WhatsApp -->
+  <div id="whatsapp"></div>
+
+  <script src="js/include.js"></script>
+  <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+    <img id="lightbox-img" class="max-h-[90%] max-w-[90%] rounded-lg">
+    </div>
+
+    <script>
+    const images = document.querySelectorAll("section img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    images.forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.classList.remove("hidden");
+        lightbox.classList.add("flex");
+        lightboxImg.src = img.src;
+    });
+    });
+
+    lightbox.addEventListener("click", () => {
+    lightbox.classList.add("hidden");
+    lightbox.classList.remove("flex");
+    });
+    </script>
+<script>
+fetch("data/gallery.json")
+  .then(res => res.json())
+  .then(images => {
+
+    const container = document.getElementById("gallery-container");
+
+    images.forEach(file => {
+
+      const card = document.createElement("div");
+      card.className = "overflow-hidden rounded-xl shadow group";
+
+      const img = document.createElement("img");
+      img.src = "assets/images/gallery/" + file;
+      img.alt = "Gallery photo";
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.className = "w-full h-60 object-cover group-hover:scale-110 transition duration-300";
+
+      // Lightbox
+      img.addEventListener("click", () => {
+        document.getElementById("lightbox").classList.remove("hidden");
+        document.getElementById("lightbox").classList.add("flex");
+        document.getElementById("lightbox-img").src = img.src;
+      });
+
+      card.appendChild(img);
+      container.appendChild(card);
+
+    });
+
+  });
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    once: true,
+    offset: 80
+  });
+</script>
+
+</body>
+</html>
