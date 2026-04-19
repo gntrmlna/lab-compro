@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PT. Titien Andaru Jaya</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (kalau kamu pakai) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<main class="pt-24">
+
+  <!-- Header -->
+  <section class="bg-[#1d78be] text-white py-16 text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h1 class="text-4xl md:text-5xl font-bold">Customer Kami</h1>
+      <p class="mt-4 text-blue-100">
+        Dipercaya oleh perusahaan dari berbagai industri
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-10">
+        <p class="text-gray-600">
+          Kami telah bekerja sama dengan 40+ perusahaan dan institusi
+        </p>
+      </div>
+
+      <!-- GRID -->
+      <div id="clients-container"
+           class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="footer"></div>
+<div id="whatsapp"></div>
+
+<script src="js/include.js"></script>
+
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration: 800,
+  once: true
+});
+</script>
+<script>
+fetch("data/clients.json")
+  .then(res => res.json())
+  .then(clients => {
+
+    const container = document.getElementById("clients-container");
+
+    clients.forEach((file, index) => {
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "flex justify-center items-center";
+
+      const img = document.createElement("img");
+      img.src = "assets/images/clients/" + file;
+      img.alt = "Client logo";
+      img.loading = "lazy";
+      img.className = "h-16 object-contain transition duration-300";
+
+      // animasi (opsional)
+      img.setAttribute("data-aos", "fade-up");
+      img.setAttribute("data-aos-delay", index * 50);
+
+      wrapper.appendChild(img);
+      container.appendChild(wrapper);
+
+    });
+
+  });
+</script>
+</body>
+</html>
