@@ -27,3 +27,4 @@ fetch("./components/whatsapp.html")
   .then(data => {
     document.getElementById("whatsapp").innerHTML = data;
   });
+
